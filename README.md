@@ -11,4 +11,3 @@ bitgarden
 - `bg/front % npm run dev`
 - `bg/back % go run server.go`
 
-checking the discord webhook
