@@ -11,3 +11,6 @@ bitgarden
 - `bg/front % npm run dev`
 - `bg/back % go run server.go`
 
+## seeds
+- https://nextjs.org/docs/api-reference/create-next-app
+- https://gobyexample.com/http-servers
