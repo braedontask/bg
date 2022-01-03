@@ -62,4 +62,28 @@ roll back in another week. in this moment, anything is better than being in the 
 
 
 *cut to: trains are tumbling by individuals on the platform. the rattling echos in the warm*
-*station air.*
+*station air. A and B are standing on the door of the 6. 'chambers st' reads on the seven-segmaent*
+*display.*
+
+**B:** i mean it. 
+
+**A:** uh huh. 
+
+**B:** i will get close to him. that furry sweet potatoe.
+
+**A:** oh my.
+
+**B:** i will get close to him. i will make him feel cool. ill bond with him over cs. she will
+love it. her supposed best friend's boyfriend will be getting along with her man. unlimited double
+dates leading up to the wedding. this is her wet dream - but over time i will pry at the smallest
+threads of their relationship. 
+
+**A:** relax.
+
+**B:** i will unshackle that negro. slave to her dominance. i will get a phd in fucking her life.
+
+**A:** you are the most.
+
+**B:** i am. 
+
+**A:** you are. 
