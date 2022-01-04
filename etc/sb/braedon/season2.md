@@ -30,12 +30,15 @@
 - (+) phenominal wom factor
 - (+) straigh-forward mvp (account, bot, and marketplace)
 - (-) potential for usage fall-off on a future platform
-- **unkowns**
+
+**unkowns**
 - is it legally feasible to do so?
 - how sophisticated is bot-detection technology?
 - who did brooklynne and others get bathing-suit deals from?
+
 **forces**
 - (00) frictionless - nobody is in this space
+
 **work**
 - build an account and bot
 - scrape notable athletes (and maybe creators)
@@ -48,10 +51,13 @@
 **deltas**
 - (+) uses attractive technology
 - (+) bootstraps ad-making for small firms
+
 **unknowns**
 - how do we create a simple qr logo to scrape?
-- **forces**
+
+**forces**
 - (3) doesn't standalone (need a co-feature like **agent0**)
+
 **work**
 - generate watermark on uploaded images/videos
 - scrape new creator content for smart-contracting
@@ -60,11 +66,14 @@
 **deltas**
 - (+) easy to do and conceptualize value ('add to storefront for $/mo')
 - (-) saturated market
+
 **unknowns**
 - how difficult is handling payment and transactions?
 - how many marketplace links in bio are there?
+
 **forces**
 - (4) takes time to build and doesn't standalone
+
 **work**
 - setup payment rails (yuck)
 - make product models for crudding to store fronts
@@ -78,10 +87,13 @@
 - (+) makes it easier for firms to audience-select
 - (+) encourages teams to work together for deals
 - (-) hard to make turnkey for athletes/creators
+
 **unknowns**
 - how do we make this more attractive for businesses?
+
 **forces**
 - (6) needs to be studied a bit more before designing in-full
+
 **work**
 - build out 'add to coalition'
 - build out rudimentary task management for coalition cohesion
@@ -91,10 +103,13 @@
 **deltas**
 - (+) agrees to the philosophy of 'business-second'
 - (-) unclear on how to make this support unique
+
 **unknowns**
 - do we believe in creativity enough to ignore the quantification problem?
+
 **forces**
 - (7) ton of infrastructure and recruiting needed to provide resources
+
 **work**
 - bootstrap a cinematography team at each major school
 - have a central editing team that handles branded content
@@ -103,15 +118,17 @@
 **deltas**
 - (-) tedious work that only enables business
 - (-) disagrees with 'business-second' philosophy
+
 **unknowns**
 - how much patience does it take to make these?
+
 **forces**
 - (9) tedious, common, and with plenty of comepetition (opendorse)
+
 **work**
 - vivisect opendorse and other tools
 - meet with a designer and product lead
 - make them do it
-
 
 ## General Unknowns
 - should we entice the athlete or the freelance agent?
