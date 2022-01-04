@@ -37,7 +37,7 @@
 - who did brooklynne and others get bathing-suit deals from?
 
 **forces**
-- (00) frictionless - nobody is in this space
+- (0) frictionless - nobody is in this space
 
 **work**
 - build an account and bot
