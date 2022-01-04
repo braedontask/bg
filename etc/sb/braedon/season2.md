@@ -30,7 +30,7 @@
 - (+) phenominal wom factor
 - (+) straigh-forward mvp (account, bot, and marketplace)
 - (-) potential for usage fall-off on a future platform
-**unkowns**
+- **unkowns**
 - is it legally feasible to do so?
 - how sophisticated is bot-detection technology?
 - who did brooklynne and others get bathing-suit deals from?
@@ -50,7 +50,7 @@
 - (+) bootstraps ad-making for small firms
 **unknowns**
 - how do we create a simple qr logo to scrape?
-**forces**
+- **forces**
 - (3) doesn't standalone (need a co-feature like **agent0**)
 **work**
 - generate watermark on uploaded images/videos
