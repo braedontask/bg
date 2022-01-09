@@ -1,8 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Pass.module.css'
+import styles from './styles/Pass.module.css'
 import React, { ChangeEvent } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
+import axios from 'axios'
 
 interface IState {
   domain?: string,
@@ -17,16 +18,21 @@ const Pass: NextPage = () => {
     masterPassword: undefined,
     version: undefined,
     password: undefined
-  });
+  })
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setState({ ...state, [e.target.id]: e.target.value });
+    setState({ ...state, [e.target.id]: e.target.value })
   }
 
   async function handleSubmit(e: React.SyntheticEvent) {
-    e?.preventDefault();
     if (state?.domain && state?.masterPassword && state?.version) {
-      setState({ ...state, password: state?.masterPassword });
+      axios.post('/api/pass', {
+        state
+      }).then(function (res) {
+        setState({ ...state, password: res.data })
+        })
+      e?.preventDefault()
+      setState({ ...state, password: state?.masterPassword })
     }
   }
 

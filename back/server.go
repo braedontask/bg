@@ -19,10 +19,14 @@ func headers(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func pass(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "smelly\n")
+}
+
 func main() {
 
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
-
+	http.HandleFunc("/pass", pass)
 	http.ListenAndServe(":8090", nil)
 }
