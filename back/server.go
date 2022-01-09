@@ -1,6 +1,8 @@
 package main
 
 import (
+	// "encoding/json"
+	"encoding/json"
 	"fmt"
 	"net/http"
 )
@@ -19,8 +21,26 @@ func headers(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+type PassReq struct {
+	Domain         string
+	Username       string
+	MasterPassword string
+	Version        string
+}
+
 func pass(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "smelly\n")
+	decoder := json.NewDecoder(req.Body)
+
+	var passReq PassReq
+	err := decoder.Decode(&passReq)
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+
+	// TODO: build password based on PassReq
+	fmt.Fprintf(w, "Your password: %s", passReq.MasterPassword)
 }
 
 func main() {

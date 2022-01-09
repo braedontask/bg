@@ -11,7 +11,10 @@ export default function passwordHandler(
   res: NextApiResponse<Data>
 ) {
   axios.post('http://localhost:8090/pass', {
-    data: req.body
+    "domain": req.body.domain,
+    "username": req.body.username,
+    "masterPassword": req.body.masterPassword,
+    "version": req.body.version
   }).then(function (resp) {
     res.status(200).json(resp.data)
   })

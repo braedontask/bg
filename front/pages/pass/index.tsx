@@ -7,6 +7,7 @@ import axios from 'axios'
 
 interface IState {
   domain?: string,
+  username?: string,
   masterPassword?: string,
   version?: number,
   password?: string
@@ -15,6 +16,7 @@ interface IState {
 const Pass: NextPage = () => {
   const [state, setState] = React.useState<IState | undefined>({
     domain: undefined,
+    username: undefined,
     masterPassword: undefined,
     version: undefined,
     password: undefined
@@ -25,9 +27,12 @@ const Pass: NextPage = () => {
   }
 
   async function handleSubmit(e: React.SyntheticEvent) {
-    if (state?.domain && state?.masterPassword && state?.version) {
+    if (state?.domain && state?.username && state?.masterPassword && state?.version) {
       axios.post('/api/pass', {
-        state
+        "domain": state?.domain,
+        "username": state?.username,
+        "masterPassword": state?.masterPassword,
+        "version": state?.version
       }).then(function (res) {
         setState({ ...state, password: res.data })
         })
@@ -49,6 +54,10 @@ const Pass: NextPage = () => {
           <Form.Group className={styles.formGroup} controlId="domain">
             <Form.Label>Domain</Form.Label>
             <Form.Control type="text" placeholder="amazon.com" onChange={handleChange}/>
+          </Form.Group>
+          <Form.Group className={styles.formGroup} controlId="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="user123" onChange={handleChange}/>
           </Form.Group>
           <Form.Group className={styles.formGroup} controlId="masterPassword">
             <Form.Label>Master Password</Form.Label>
