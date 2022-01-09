@@ -2,11 +2,10 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import useSWR from 'swr'
+import axios from 'axios'
 
-async function fetcher(url: string) {
-  const resp = await fetch(url);
-  return resp.text();
+async function callme() {
+  console.log('poooopopoppo');
 }
 
 const Home: NextPage = () => {
