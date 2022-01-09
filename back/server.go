@@ -24,7 +24,6 @@ func pass(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/pass", pass)
