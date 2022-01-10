@@ -3,7 +3,7 @@
 package ent
 
 import (
-	"back/ent/biouser"
+	"back/ent/entbiouser"
 	"back/ent/predicate"
 	"context"
 	"fmt"
@@ -21,11 +21,11 @@ const (
 	OpUpdateOne = ent.OpUpdateOne
 
 	// Node types.
-	TypeBioUser = "BioUser"
+	TypeEntBioUser = "EntBioUser"
 )
 
-// BioUserMutation represents an operation that mutates the BioUser nodes in the graph.
-type BioUserMutation struct {
+// EntBioUserMutation represents an operation that mutates the EntBioUser nodes in the graph.
+type EntBioUserMutation struct {
 	config
 	op            Op
 	typ           string
@@ -33,21 +33,21 @@ type BioUserMutation struct {
 	name          *string
 	clearedFields map[string]struct{}
 	done          bool
-	oldValue      func(context.Context) (*BioUser, error)
-	predicates    []predicate.BioUser
+	oldValue      func(context.Context) (*EntBioUser, error)
+	predicates    []predicate.EntBioUser
 }
 
-var _ ent.Mutation = (*BioUserMutation)(nil)
+var _ ent.Mutation = (*EntBioUserMutation)(nil)
 
-// biouserOption allows management of the mutation configuration using functional options.
-type biouserOption func(*BioUserMutation)
+// entbiouserOption allows management of the mutation configuration using functional options.
+type entbiouserOption func(*EntBioUserMutation)
 
-// newBioUserMutation creates new mutation for the BioUser entity.
-func newBioUserMutation(c config, op Op, opts ...biouserOption) *BioUserMutation {
-	m := &BioUserMutation{
+// newEntBioUserMutation creates new mutation for the EntBioUser entity.
+func newEntBioUserMutation(c config, op Op, opts ...entbiouserOption) *EntBioUserMutation {
+	m := &EntBioUserMutation{
 		config:        c,
 		op:            op,
-		typ:           TypeBioUser,
+		typ:           TypeEntBioUser,
 		clearedFields: make(map[string]struct{}),
 	}
 	for _, opt := range opts {
@@ -56,20 +56,20 @@ func newBioUserMutation(c config, op Op, opts ...biouserOption) *BioUserMutation
 	return m
 }
 
-// withBioUserID sets the ID field of the mutation.
-func withBioUserID(id int) biouserOption {
-	return func(m *BioUserMutation) {
+// withEntBioUserID sets the ID field of the mutation.
+func withEntBioUserID(id int) entbiouserOption {
+	return func(m *EntBioUserMutation) {
 		var (
 			err   error
 			once  sync.Once
-			value *BioUser
+			value *EntBioUser
 		)
-		m.oldValue = func(ctx context.Context) (*BioUser, error) {
+		m.oldValue = func(ctx context.Context) (*EntBioUser, error) {
 			once.Do(func() {
 				if m.done {
 					err = fmt.Errorf("querying old values post mutation is not allowed")
 				} else {
-					value, err = m.Client().BioUser.Get(ctx, id)
+					value, err = m.Client().EntBioUser.Get(ctx, id)
 				}
 			})
 			return value, err
@@ -78,10 +78,10 @@ func withBioUserID(id int) biouserOption {
 	}
 }
 
-// withBioUser sets the old BioUser of the mutation.
-func withBioUser(node *BioUser) biouserOption {
-	return func(m *BioUserMutation) {
-		m.oldValue = func(context.Context) (*BioUser, error) {
+// withEntBioUser sets the old EntBioUser of the mutation.
+func withEntBioUser(node *EntBioUser) entbiouserOption {
+	return func(m *EntBioUserMutation) {
+		m.oldValue = func(context.Context) (*EntBioUser, error) {
 			return node, nil
 		}
 		m.id = &node.ID
@@ -90,7 +90,7 @@ func withBioUser(node *BioUser) biouserOption {
 
 // Client returns a new `ent.Client` from the mutation. If the mutation was
 // executed in a transaction (ent.Tx), a transactional client is returned.
-func (m BioUserMutation) Client() *Client {
+func (m EntBioUserMutation) Client() *Client {
 	client := &Client{config: m.config}
 	client.init()
 	return client
@@ -98,7 +98,7 @@ func (m BioUserMutation) Client() *Client {
 
 // Tx returns an `ent.Tx` for mutations that were executed in transactions;
 // it returns an error otherwise.
-func (m BioUserMutation) Tx() (*Tx, error) {
+func (m EntBioUserMutation) Tx() (*Tx, error) {
 	if _, ok := m.driver.(*txDriver); !ok {
 		return nil, fmt.Errorf("ent: mutation is not running in a transaction")
 	}
@@ -109,7 +109,7 @@ func (m BioUserMutation) Tx() (*Tx, error) {
 
 // ID returns the ID value in the mutation. Note that the ID is only available
 // if it was provided to the builder or after it was returned from the database.
-func (m *BioUserMutation) ID() (id int, exists bool) {
+func (m *EntBioUserMutation) ID() (id int, exists bool) {
 	if m.id == nil {
 		return
 	}
@@ -117,12 +117,12 @@ func (m *BioUserMutation) ID() (id int, exists bool) {
 }
 
 // SetName sets the "name" field.
-func (m *BioUserMutation) SetName(s string) {
+func (m *EntBioUserMutation) SetName(s string) {
 	m.name = &s
 }
 
 // Name returns the value of the "name" field in the mutation.
-func (m *BioUserMutation) Name() (r string, exists bool) {
+func (m *EntBioUserMutation) Name() (r string, exists bool) {
 	v := m.name
 	if v == nil {
 		return
@@ -130,10 +130,10 @@ func (m *BioUserMutation) Name() (r string, exists bool) {
 	return *v, true
 }
 
-// OldName returns the old "name" field's value of the BioUser entity.
-// If the BioUser object wasn't provided to the builder, the object is fetched from the database.
+// OldName returns the old "name" field's value of the EntBioUser entity.
+// If the EntBioUser object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *BioUserMutation) OldName(ctx context.Context) (v string, err error) {
+func (m *EntBioUserMutation) OldName(ctx context.Context) (v string, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, fmt.Errorf("OldName is only allowed on UpdateOne operations")
 	}
@@ -148,32 +148,32 @@ func (m *BioUserMutation) OldName(ctx context.Context) (v string, err error) {
 }
 
 // ResetName resets all changes to the "name" field.
-func (m *BioUserMutation) ResetName() {
+func (m *EntBioUserMutation) ResetName() {
 	m.name = nil
 }
 
-// Where appends a list predicates to the BioUserMutation builder.
-func (m *BioUserMutation) Where(ps ...predicate.BioUser) {
+// Where appends a list predicates to the EntBioUserMutation builder.
+func (m *EntBioUserMutation) Where(ps ...predicate.EntBioUser) {
 	m.predicates = append(m.predicates, ps...)
 }
 
 // Op returns the operation name.
-func (m *BioUserMutation) Op() Op {
+func (m *EntBioUserMutation) Op() Op {
 	return m.op
 }
 
-// Type returns the node type of this mutation (BioUser).
-func (m *BioUserMutation) Type() string {
+// Type returns the node type of this mutation (EntBioUser).
+func (m *EntBioUserMutation) Type() string {
 	return m.typ
 }
 
 // Fields returns all fields that were changed during this mutation. Note that in
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
-func (m *BioUserMutation) Fields() []string {
+func (m *EntBioUserMutation) Fields() []string {
 	fields := make([]string, 0, 1)
 	if m.name != nil {
-		fields = append(fields, biouser.FieldName)
+		fields = append(fields, entbiouser.FieldName)
 	}
 	return fields
 }
@@ -181,9 +181,9 @@ func (m *BioUserMutation) Fields() []string {
 // Field returns the value of a field with the given name. The second boolean
 // return value indicates that this field was not set, or was not defined in the
 // schema.
-func (m *BioUserMutation) Field(name string) (ent.Value, bool) {
+func (m *EntBioUserMutation) Field(name string) (ent.Value, bool) {
 	switch name {
-	case biouser.FieldName:
+	case entbiouser.FieldName:
 		return m.Name()
 	}
 	return nil, false
@@ -192,20 +192,20 @@ func (m *BioUserMutation) Field(name string) (ent.Value, bool) {
 // OldField returns the old value of the field from the database. An error is
 // returned if the mutation operation is not UpdateOne, or the query to the
 // database failed.
-func (m *BioUserMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
+func (m *EntBioUserMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
-	case biouser.FieldName:
+	case entbiouser.FieldName:
 		return m.OldName(ctx)
 	}
-	return nil, fmt.Errorf("unknown BioUser field %s", name)
+	return nil, fmt.Errorf("unknown EntBioUser field %s", name)
 }
 
 // SetField sets the value of a field with the given name. It returns an error if
 // the field is not defined in the schema, or if the type mismatched the field
 // type.
-func (m *BioUserMutation) SetField(name string, value ent.Value) error {
+func (m *EntBioUserMutation) SetField(name string, value ent.Value) error {
 	switch name {
-	case biouser.FieldName:
+	case entbiouser.FieldName:
 		v, ok := value.(string)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
@@ -213,105 +213,105 @@ func (m *BioUserMutation) SetField(name string, value ent.Value) error {
 		m.SetName(v)
 		return nil
 	}
-	return fmt.Errorf("unknown BioUser field %s", name)
+	return fmt.Errorf("unknown EntBioUser field %s", name)
 }
 
 // AddedFields returns all numeric fields that were incremented/decremented during
 // this mutation.
-func (m *BioUserMutation) AddedFields() []string {
+func (m *EntBioUserMutation) AddedFields() []string {
 	return nil
 }
 
 // AddedField returns the numeric value that was incremented/decremented on a field
 // with the given name. The second boolean return value indicates that this field
 // was not set, or was not defined in the schema.
-func (m *BioUserMutation) AddedField(name string) (ent.Value, bool) {
+func (m *EntBioUserMutation) AddedField(name string) (ent.Value, bool) {
 	return nil, false
 }
 
 // AddField adds the value to the field with the given name. It returns an error if
 // the field is not defined in the schema, or if the type mismatched the field
 // type.
-func (m *BioUserMutation) AddField(name string, value ent.Value) error {
+func (m *EntBioUserMutation) AddField(name string, value ent.Value) error {
 	switch name {
 	}
-	return fmt.Errorf("unknown BioUser numeric field %s", name)
+	return fmt.Errorf("unknown EntBioUser numeric field %s", name)
 }
 
 // ClearedFields returns all nullable fields that were cleared during this
 // mutation.
-func (m *BioUserMutation) ClearedFields() []string {
+func (m *EntBioUserMutation) ClearedFields() []string {
 	return nil
 }
 
 // FieldCleared returns a boolean indicating if a field with the given name was
 // cleared in this mutation.
-func (m *BioUserMutation) FieldCleared(name string) bool {
+func (m *EntBioUserMutation) FieldCleared(name string) bool {
 	_, ok := m.clearedFields[name]
 	return ok
 }
 
 // ClearField clears the value of the field with the given name. It returns an
 // error if the field is not defined in the schema.
-func (m *BioUserMutation) ClearField(name string) error {
-	return fmt.Errorf("unknown BioUser nullable field %s", name)
+func (m *EntBioUserMutation) ClearField(name string) error {
+	return fmt.Errorf("unknown EntBioUser nullable field %s", name)
 }
 
 // ResetField resets all changes in the mutation for the field with the given name.
 // It returns an error if the field is not defined in the schema.
-func (m *BioUserMutation) ResetField(name string) error {
+func (m *EntBioUserMutation) ResetField(name string) error {
 	switch name {
-	case biouser.FieldName:
+	case entbiouser.FieldName:
 		m.ResetName()
 		return nil
 	}
-	return fmt.Errorf("unknown BioUser field %s", name)
+	return fmt.Errorf("unknown EntBioUser field %s", name)
 }
 
 // AddedEdges returns all edge names that were set/added in this mutation.
-func (m *BioUserMutation) AddedEdges() []string {
+func (m *EntBioUserMutation) AddedEdges() []string {
 	edges := make([]string, 0, 0)
 	return edges
 }
 
 // AddedIDs returns all IDs (to other nodes) that were added for the given edge
 // name in this mutation.
-func (m *BioUserMutation) AddedIDs(name string) []ent.Value {
+func (m *EntBioUserMutation) AddedIDs(name string) []ent.Value {
 	return nil
 }
 
 // RemovedEdges returns all edge names that were removed in this mutation.
-func (m *BioUserMutation) RemovedEdges() []string {
+func (m *EntBioUserMutation) RemovedEdges() []string {
 	edges := make([]string, 0, 0)
 	return edges
 }
 
 // RemovedIDs returns all IDs (to other nodes) that were removed for the edge with
 // the given name in this mutation.
-func (m *BioUserMutation) RemovedIDs(name string) []ent.Value {
+func (m *EntBioUserMutation) RemovedIDs(name string) []ent.Value {
 	return nil
 }
 
 // ClearedEdges returns all edge names that were cleared in this mutation.
-func (m *BioUserMutation) ClearedEdges() []string {
+func (m *EntBioUserMutation) ClearedEdges() []string {
 	edges := make([]string, 0, 0)
 	return edges
 }
 
 // EdgeCleared returns a boolean which indicates if the edge with the given name
 // was cleared in this mutation.
-func (m *BioUserMutation) EdgeCleared(name string) bool {
+func (m *EntBioUserMutation) EdgeCleared(name string) bool {
 	return false
 }
 
 // ClearEdge clears the value of the edge with the given name. It returns an error
 // if that edge is not defined in the schema.
-func (m *BioUserMutation) ClearEdge(name string) error {
-	return fmt.Errorf("unknown BioUser unique edge %s", name)
+func (m *EntBioUserMutation) ClearEdge(name string) error {
+	return fmt.Errorf("unknown EntBioUser unique edge %s", name)
 }
 
 // ResetEdge resets all changes to the edge with the given name in this mutation.
 // It returns an error if the edge is not defined in the schema.
-func (m *BioUserMutation) ResetEdge(name string) error {
-	return fmt.Errorf("unknown BioUser edge %s", name)
+func (m *EntBioUserMutation) ResetEdge(name string) error {
+	return fmt.Errorf("unknown EntBioUser edge %s", name)
 }

@@ -6,12 +6,12 @@ import (
 )
 
 // BioUser holds the schema definition for the BioUser entity.
-type BioUser struct {
+type EntBioUser struct {
 	ent.Schema
 }
 
 // Fields of the BioUser.
-func (BioUser) Fields() []ent.Field {
+func (EntBioUser) Fields() []ent.Field {
 	return []ent.Field{
 		field.String("name").
 			Default("unknown"),
@@ -19,6 +19,6 @@ func (BioUser) Fields() []ent.Field {
 }
 
 // Edges of the BioUser.
-func (BioUser) Edges() []ent.Edge {
+func (EntBioUser) Edges() []ent.Edge {
 	return nil
 }

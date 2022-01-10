@@ -6,5 +6,5 @@ import (
 	"entgo.io/ent/dialect/sql"
 )
 
-// BioUser is the predicate function for biouser builders.
-type BioUser func(*sql.Selector)
+// EntBioUser is the predicate function for entbiouser builders.
+type EntBioUser func(*sql.Selector)

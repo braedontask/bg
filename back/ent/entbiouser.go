@@ -3,15 +3,15 @@
 package ent
 
 import (
-	"back/ent/biouser"
+	"back/ent/entbiouser"
 	"fmt"
 	"strings"
 
 	"entgo.io/ent/dialect/sql"
 )
 
-// BioUser is the model entity for the BioUser schema.
-type BioUser struct {
+// EntBioUser is the model entity for the EntBioUser schema.
+type EntBioUser struct {
 	config `json:"-"`
 	// ID of the ent.
 	ID int `json:"id,omitempty"`
@@ -20,80 +20,80 @@ type BioUser struct {
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
-func (*BioUser) scanValues(columns []string) ([]interface{}, error) {
+func (*EntBioUser) scanValues(columns []string) ([]interface{}, error) {
 	values := make([]interface{}, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case biouser.FieldID:
+		case entbiouser.FieldID:
 			values[i] = new(sql.NullInt64)
-		case biouser.FieldName:
+		case entbiouser.FieldName:
 			values[i] = new(sql.NullString)
 		default:
-			return nil, fmt.Errorf("unexpected column %q for type BioUser", columns[i])
+			return nil, fmt.Errorf("unexpected column %q for type EntBioUser", columns[i])
 		}
 	}
 	return values, nil
 }
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
-// to the BioUser fields.
-func (bu *BioUser) assignValues(columns []string, values []interface{}) error {
+// to the EntBioUser fields.
+func (ebu *EntBioUser) assignValues(columns []string, values []interface{}) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
 	for i := range columns {
 		switch columns[i] {
-		case biouser.FieldID:
+		case entbiouser.FieldID:
 			value, ok := values[i].(*sql.NullInt64)
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			bu.ID = int(value.Int64)
-		case biouser.FieldName:
+			ebu.ID = int(value.Int64)
+		case entbiouser.FieldName:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field name", values[i])
 			} else if value.Valid {
-				bu.Name = value.String
+				ebu.Name = value.String
 			}
 		}
 	}
 	return nil
 }
 
-// Update returns a builder for updating this BioUser.
-// Note that you need to call BioUser.Unwrap() before calling this method if this BioUser
+// Update returns a builder for updating this EntBioUser.
+// Note that you need to call EntBioUser.Unwrap() before calling this method if this EntBioUser
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (bu *BioUser) Update() *BioUserUpdateOne {
-	return (&BioUserClient{config: bu.config}).UpdateOne(bu)
+func (ebu *EntBioUser) Update() *EntBioUserUpdateOne {
+	return (&EntBioUserClient{config: ebu.config}).UpdateOne(ebu)
 }
 
-// Unwrap unwraps the BioUser entity that was returned from a transaction after it was closed,
+// Unwrap unwraps the EntBioUser entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (bu *BioUser) Unwrap() *BioUser {
-	tx, ok := bu.config.driver.(*txDriver)
+func (ebu *EntBioUser) Unwrap() *EntBioUser {
+	tx, ok := ebu.config.driver.(*txDriver)
 	if !ok {
-		panic("ent: BioUser is not a transactional entity")
+		panic("ent: EntBioUser is not a transactional entity")
 	}
-	bu.config.driver = tx.drv
-	return bu
+	ebu.config.driver = tx.drv
+	return ebu
 }
 
 // String implements the fmt.Stringer.
-func (bu *BioUser) String() string {
+func (ebu *EntBioUser) String() string {
 	var builder strings.Builder
-	builder.WriteString("BioUser(")
-	builder.WriteString(fmt.Sprintf("id=%v", bu.ID))
+	builder.WriteString("EntBioUser(")
+	builder.WriteString(fmt.Sprintf("id=%v", ebu.ID))
 	builder.WriteString(", name=")
-	builder.WriteString(bu.Name)
+	builder.WriteString(ebu.Name)
 	builder.WriteByte(')')
 	return builder.String()
 }
 
-// BioUsers is a parsable slice of BioUser.
-type BioUsers []*BioUser
+// EntBioUsers is a parsable slice of EntBioUser.
+type EntBioUsers []*EntBioUser
 
-func (bu BioUsers) config(cfg config) {
-	for _i := range bu {
-		bu[_i].config = cfg
+func (ebu EntBioUsers) config(cfg config) {
+	for _i := range ebu {
+		ebu[_i].config = cfg
 	}
 }

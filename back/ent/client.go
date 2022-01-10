@@ -9,7 +9,7 @@ import (
 
 	"back/ent/migrate"
 
-	"back/ent/biouser"
+	"back/ent/entbiouser"
 
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"
@@ -20,8 +20,8 @@ type Client struct {
 	config
 	// Schema is the client for creating, migrating and dropping schema.
 	Schema *migrate.Schema
-	// BioUser is the client for interacting with the BioUser builders.
-	BioUser *BioUserClient
+	// EntBioUser is the client for interacting with the EntBioUser builders.
+	EntBioUser *EntBioUserClient
 }
 
 // NewClient creates a new client configured with the given options.
@@ -35,7 +35,7 @@ func NewClient(opts ...Option) *Client {
 
 func (c *Client) init() {
 	c.Schema = migrate.NewSchema(c.driver)
-	c.BioUser = NewBioUserClient(c.config)
+	c.EntBioUser = NewEntBioUserClient(c.config)
 }
 
 // Open opens a database/sql.DB specified by the driver name and
@@ -67,9 +67,9 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 	cfg := c.config
 	cfg.driver = tx
 	return &Tx{
-		ctx:     ctx,
-		config:  cfg,
-		BioUser: NewBioUserClient(cfg),
+		ctx:        ctx,
+		config:     cfg,
+		EntBioUser: NewEntBioUserClient(cfg),
 	}, nil
 }
 
@@ -87,15 +87,15 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 	cfg := c.config
 	cfg.driver = &txDriver{tx: tx, drv: c.driver}
 	return &Tx{
-		config:  cfg,
-		BioUser: NewBioUserClient(cfg),
+		config:     cfg,
+		EntBioUser: NewEntBioUserClient(cfg),
 	}, nil
 }
 
 // Debug returns a new debug-client. It's used to get verbose logging on specific operations.
 //
 //	client.Debug().
-//		BioUser.
+//		EntBioUser.
 //		Query().
 //		Count(ctx)
 //
@@ -118,87 +118,87 @@ func (c *Client) Close() error {
 // Use adds the mutation hooks to all the entity clients.
 // In order to add hooks to a specific client, call: `client.Node.Use(...)`.
 func (c *Client) Use(hooks ...Hook) {
-	c.BioUser.Use(hooks...)
+	c.EntBioUser.Use(hooks...)
 }
 
-// BioUserClient is a client for the BioUser schema.
-type BioUserClient struct {
+// EntBioUserClient is a client for the EntBioUser schema.
+type EntBioUserClient struct {
 	config
 }
 
-// NewBioUserClient returns a client for the BioUser from the given config.
-func NewBioUserClient(c config) *BioUserClient {
-	return &BioUserClient{config: c}
+// NewEntBioUserClient returns a client for the EntBioUser from the given config.
+func NewEntBioUserClient(c config) *EntBioUserClient {
+	return &EntBioUserClient{config: c}
 }
 
 // Use adds a list of mutation hooks to the hooks stack.
-// A call to `Use(f, g, h)` equals to `biouser.Hooks(f(g(h())))`.
-func (c *BioUserClient) Use(hooks ...Hook) {
-	c.hooks.BioUser = append(c.hooks.BioUser, hooks...)
+// A call to `Use(f, g, h)` equals to `entbiouser.Hooks(f(g(h())))`.
+func (c *EntBioUserClient) Use(hooks ...Hook) {
+	c.hooks.EntBioUser = append(c.hooks.EntBioUser, hooks...)
 }
 
-// Create returns a create builder for BioUser.
-func (c *BioUserClient) Create() *BioUserCreate {
-	mutation := newBioUserMutation(c.config, OpCreate)
-	return &BioUserCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+// Create returns a create builder for EntBioUser.
+func (c *EntBioUserClient) Create() *EntBioUserCreate {
+	mutation := newEntBioUserMutation(c.config, OpCreate)
+	return &EntBioUserCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// CreateBulk returns a builder for creating a bulk of BioUser entities.
-func (c *BioUserClient) CreateBulk(builders ...*BioUserCreate) *BioUserCreateBulk {
-	return &BioUserCreateBulk{config: c.config, builders: builders}
+// CreateBulk returns a builder for creating a bulk of EntBioUser entities.
+func (c *EntBioUserClient) CreateBulk(builders ...*EntBioUserCreate) *EntBioUserCreateBulk {
+	return &EntBioUserCreateBulk{config: c.config, builders: builders}
 }
 
-// Update returns an update builder for BioUser.
-func (c *BioUserClient) Update() *BioUserUpdate {
-	mutation := newBioUserMutation(c.config, OpUpdate)
-	return &BioUserUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+// Update returns an update builder for EntBioUser.
+func (c *EntBioUserClient) Update() *EntBioUserUpdate {
+	mutation := newEntBioUserMutation(c.config, OpUpdate)
+	return &EntBioUserUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
 // UpdateOne returns an update builder for the given entity.
-func (c *BioUserClient) UpdateOne(bu *BioUser) *BioUserUpdateOne {
-	mutation := newBioUserMutation(c.config, OpUpdateOne, withBioUser(bu))
-	return &BioUserUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+func (c *EntBioUserClient) UpdateOne(ebu *EntBioUser) *EntBioUserUpdateOne {
+	mutation := newEntBioUserMutation(c.config, OpUpdateOne, withEntBioUser(ebu))
+	return &EntBioUserUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
 // UpdateOneID returns an update builder for the given id.
-func (c *BioUserClient) UpdateOneID(id int) *BioUserUpdateOne {
-	mutation := newBioUserMutation(c.config, OpUpdateOne, withBioUserID(id))
-	return &BioUserUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+func (c *EntBioUserClient) UpdateOneID(id int) *EntBioUserUpdateOne {
+	mutation := newEntBioUserMutation(c.config, OpUpdateOne, withEntBioUserID(id))
+	return &EntBioUserUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// Delete returns a delete builder for BioUser.
-func (c *BioUserClient) Delete() *BioUserDelete {
-	mutation := newBioUserMutation(c.config, OpDelete)
-	return &BioUserDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+// Delete returns a delete builder for EntBioUser.
+func (c *EntBioUserClient) Delete() *EntBioUserDelete {
+	mutation := newEntBioUserMutation(c.config, OpDelete)
+	return &EntBioUserDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
 // DeleteOne returns a delete builder for the given entity.
-func (c *BioUserClient) DeleteOne(bu *BioUser) *BioUserDeleteOne {
-	return c.DeleteOneID(bu.ID)
+func (c *EntBioUserClient) DeleteOne(ebu *EntBioUser) *EntBioUserDeleteOne {
+	return c.DeleteOneID(ebu.ID)
 }
 
 // DeleteOneID returns a delete builder for the given id.
-func (c *BioUserClient) DeleteOneID(id int) *BioUserDeleteOne {
-	builder := c.Delete().Where(biouser.ID(id))
+func (c *EntBioUserClient) DeleteOneID(id int) *EntBioUserDeleteOne {
+	builder := c.Delete().Where(entbiouser.ID(id))
 	builder.mutation.id = &id
 	builder.mutation.op = OpDeleteOne
-	return &BioUserDeleteOne{builder}
+	return &EntBioUserDeleteOne{builder}
 }
 
-// Query returns a query builder for BioUser.
-func (c *BioUserClient) Query() *BioUserQuery {
-	return &BioUserQuery{
+// Query returns a query builder for EntBioUser.
+func (c *EntBioUserClient) Query() *EntBioUserQuery {
+	return &EntBioUserQuery{
 		config: c.config,
 	}
 }
 
-// Get returns a BioUser entity by its id.
-func (c *BioUserClient) Get(ctx context.Context, id int) (*BioUser, error) {
-	return c.Query().Where(biouser.ID(id)).Only(ctx)
+// Get returns a EntBioUser entity by its id.
+func (c *EntBioUserClient) Get(ctx context.Context, id int) (*EntBioUser, error) {
+	return c.Query().Where(entbiouser.ID(id)).Only(ctx)
 }
 
 // GetX is like Get, but panics if an error occurs.
-func (c *BioUserClient) GetX(ctx context.Context, id int) *BioUser {
+func (c *EntBioUserClient) GetX(ctx context.Context, id int) *EntBioUser {
 	obj, err := c.Get(ctx, id)
 	if err != nil {
 		panic(err)
@@ -207,6 +207,6 @@ func (c *BioUserClient) GetX(ctx context.Context, id int) *BioUser {
 }
 
 // Hooks returns the client hooks.
-func (c *BioUserClient) Hooks() []Hook {
-	return c.hooks.BioUser
+func (c *EntBioUserClient) Hooks() []Hook {
+	return c.hooks.EntBioUser
 }
