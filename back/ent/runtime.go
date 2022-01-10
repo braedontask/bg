@@ -3,7 +3,7 @@
 package ent
 
 import (
-	"back/ent/biouser"
+	"back/ent/entbiouser"
 	"back/ent/schema"
 )
 
@@ -11,10 +11,10 @@ import (
 // (default values, validators, hooks and policies) and stitches it
 // to their package variables.
 func init() {
-	biouserFields := schema.BioUser{}.Fields()
-	_ = biouserFields
-	// biouserDescName is the schema descriptor for name field.
-	biouserDescName := biouserFields[0].Descriptor()
-	// biouser.DefaultName holds the default value on creation for the name field.
-	biouser.DefaultName = biouserDescName.Default.(string)
+	entbiouserFields := schema.EntBioUser{}.Fields()
+	_ = entbiouserFields
+	// entbiouserDescName is the schema descriptor for name field.
+	entbiouserDescName := entbiouserFields[0].Descriptor()
+	// entbiouser.DefaultName holds the default value on creation for the name field.
+	entbiouser.DefaultName = entbiouserDescName.Default.(string)
 }

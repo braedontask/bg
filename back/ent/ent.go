@@ -3,7 +3,7 @@
 package ent
 
 import (
-	"back/ent/biouser"
+	"back/ent/entbiouser"
 	"errors"
 	"fmt"
 
@@ -29,7 +29,7 @@ type OrderFunc func(*sql.Selector)
 // columnChecker returns a function indicates if the column exists in the given column.
 func columnChecker(table string) func(string) error {
 	checks := map[string]func(string) bool{
-		biouser.Table: biouser.ValidColumn,
+		entbiouser.Table: entbiouser.ValidColumn,
 	}
 	check, ok := checks[table]
 	if !ok {

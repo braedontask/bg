@@ -8,20 +8,20 @@ import (
 )
 
 var (
-	// BioUsersColumns holds the columns for the "bio_users" table.
-	BioUsersColumns = []*schema.Column{
+	// EntBioUsersColumns holds the columns for the "ent_bio_users" table.
+	EntBioUsersColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "name", Type: field.TypeString, Default: "unknown"},
 	}
-	// BioUsersTable holds the schema information for the "bio_users" table.
-	BioUsersTable = &schema.Table{
-		Name:       "bio_users",
-		Columns:    BioUsersColumns,
-		PrimaryKey: []*schema.Column{BioUsersColumns[0]},
+	// EntBioUsersTable holds the schema information for the "ent_bio_users" table.
+	EntBioUsersTable = &schema.Table{
+		Name:       "ent_bio_users",
+		Columns:    EntBioUsersColumns,
+		PrimaryKey: []*schema.Column{EntBioUsersColumns[0]},
 	}
 	// Tables holds all the tables in the schema.
 	Tables = []*schema.Table{
-		BioUsersTable,
+		EntBioUsersTable,
 	}
 )
 

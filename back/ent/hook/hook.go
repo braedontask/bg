@@ -8,15 +8,15 @@ import (
 	"fmt"
 )
 
-// The BioUserFunc type is an adapter to allow the use of ordinary
-// function as BioUser mutator.
-type BioUserFunc func(context.Context, *ent.BioUserMutation) (ent.Value, error)
+// The EntBioUserFunc type is an adapter to allow the use of ordinary
+// function as EntBioUser mutator.
+type EntBioUserFunc func(context.Context, *ent.EntBioUserMutation) (ent.Value, error)
 
 // Mutate calls f(ctx, m).
-func (f BioUserFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
-	mv, ok := m.(*ent.BioUserMutation)
+func (f EntBioUserFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.EntBioUserMutation)
 	if !ok {
-		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.BioUserMutation", m)
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.EntBioUserMutation", m)
 	}
 	return f(ctx, mv)
 }
